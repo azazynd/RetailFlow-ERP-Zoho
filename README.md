@@ -14,8 +14,8 @@ The system combines low-code application development with custom Deluge automati
 ![Dashboard](screenshots/dashboard-overview.png)
 
 ## Sales Entry Form
-![Sales Form](screenshots/sales-form1.png)
-![Sales Form](screenshots/sales-form2.png)
+![Sales Form](screenshots/sale-form1.png)
+![Sales Form](screenshots/sale-form2.png)
 
 ## Purchase Entry Form
 ![Purchase Form](screenshots/purchase-form1.png)
@@ -31,7 +31,7 @@ The system combines low-code application development with custom Deluge automati
 ![Inventory](screenshots/inventory-report.png)
 
 ## Zoho Books Inventory & Financial Reports
-![Books Reports](screenshots/books-reports.png)
+![Books Reports](screenshots/books-report.png)
 ![Financial reports](screenshots/fin-reports.png)
 
 ## Zoho Books Bill

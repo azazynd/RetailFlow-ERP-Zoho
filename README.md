@@ -32,6 +32,7 @@ The system combines low-code application development with custom Deluge automati
 
 ## Zoho Books Inventory & Financial Reports
 ![Books Reports](screenshots/books-reports.png)
+![Financial reports](screenshots/fin-reports.png)
 
 ## Zoho Books Bill
 ![Zoho Books Bill](screenshots/books-bill.png)

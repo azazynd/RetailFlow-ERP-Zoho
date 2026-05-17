@@ -185,7 +185,6 @@ The project required extensive debugging, workflow restructuring, and business l
 
 --
 # Author
-Developed by Aza
-BCA Student | ERP Automation | AI & Data Enthusiast
+
 Developed by Aza
 BCA Student | ERP Automation | AI & Data Enthusiast

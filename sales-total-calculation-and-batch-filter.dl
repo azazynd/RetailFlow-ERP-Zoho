@@ -19,7 +19,8 @@
 // This workflow reduces manual calculation errors
 // and improves billing accuracy inside the ERP.
 //
-// USE SAME CODE FOR SALE FORM------>USER INPUT OF DISCOUNT PERCENTAGE (TRIGGER)
+// USE SAME CODE BELOW FOR SALE FORM------>USER INPUT OF DISCOUNT PERCENTAGE and USER INPUT TRIGGER RECALC FIELD(TRIGGER)
+// IN SALE FORM ----> TRIGGER DELETION OF ROW FROM SUBFORM (ITEMS) IN SALE FORM  add this code in that workflow( input.Trigger_Recalc = zoho.currenttime.toTime().toLong() % 1000000000;)
 //-------------------------------------------------------------------------
 
 

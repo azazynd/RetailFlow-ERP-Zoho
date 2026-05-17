@@ -1,0 +1,92 @@
+
+// Sales Workflow - On Submission
+//
+// This workflow handles inventory updates whenever
+// a sale is created or edited.
+//
+// What this workflow does:
+// - fetches old sale logs for the current sale
+// - removes previously sold quantities from inventory
+// - deletes old logs to avoid duplicate calculations
+// - updates inventory with new sold quantities
+// - creates inventory rows if batch does not exist
+// - stores updated transaction logs in Sale_Log
+//
+// This helps maintain accurate batch-wise inventory
+// tracking and prevents stock mismatch during edits.
+//
+// =====================================================
+
+// -----------.deluge scipt
+// get old logs for this sale
+oldLogs = Sale_Log[Sale_ID == input.ID.toLong()];
+
+// remove old sold qty from inventory before recalculating
+for each o in oldLogs
+{
+inv = Product_Inventory[Product.ID == o.Product.ID && Batch_Number == o.Batch_Number];
+
+if(inv.count() > 0)
+{
+for each r in inv
+{
+new_sale_qty = ifnull(r.Sale_Qty,0) - ifnull(o.Qty,0);
+
+// avoid negative stock
+if(new_sale_qty > 0)
+{
+r.Sale_Qty = new_sale_qty;
+}
+else
+{
+r.Sale_Qty = 0;
+}
+}
+}
+}
+
+// delete old logs because updated values will be inserted again
+delete from Sale_Log[Sale_ID == input.ID.toLong()];
+
+// loop through current items in sales form
+for each roww in input.Items
+{
+if(roww.Product != null && roww.Batch_Number != null)
+{
+batch_text = roww.Batch_Number.Batch_Number.toString();
+
+// check inventory for same product and batch
+inv = Product_Inventory[Product.ID == roww.Product.ID && Batch_Number == batch_text];
+
+// if inventory exists update sold qty
+if(inv.count() > 0)
+{
+for each r in inv
+{
+r.Sale_Qty = ifnull(r.Sale_Qty,0) + ifnull(roww.Qty,0);
+}
+}
+else
+{
+// create new inventory row if batch not found
+insert into Product_Inventory
+[
+Product = roww.Product
+Batch_Number = batch_text
+Purchase_Qty = 0
+Sale_Qty = ifnull(roww.Qty,0)
+Added_User = zoho.loginuser
+]
+}
+
+// save sale log for tracking
+insert into Sale_Log
+[
+Product = roww.Product
+Batch_Number = batch_text
+Qty = ifnull(roww.Qty,0)
+Sale_ID = input.ID
+Added_User = zoho.loginuser
+]
+}
+}
